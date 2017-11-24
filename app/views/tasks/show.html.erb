@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+<h3>
+<strong><%= @task.assigned_to %></strong>
+</h3>
+
+
+<% if @task.created_at <= Time.now+1.minute %>
+<div class= "color">
+ <%= @task.name %>  <%=@task.description %> <%= @task.due_date%>
+<%end%>
+
+<% if @task.created_at <= Time.now+5.minute && !(@task.due_date <= Time.now+1.minute)%>
+<div class= "color2">
+ <%= @task.name %>  <%=@task.description %> <%= @task.due_date%>
+<%end%>
+<!-- <p>
+  <strong>Name:</strong>
+  <%= @task.name %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @task.projectname %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%=@task.description %>
+</p>
+
+<p>
+  <strong>Assigned to:</strong>
+  <%= @task.assigned_to %>
+</p>
+
+<p>
+  <strong>image:</strong>
+  <%= image_tag @task.image %>
+</p> 
+
+<p>
+  <strong>Date:</strong>
+  <%= @task.due_date%>
+</p>
+
+<p>
+  <strong>Is done:</strong>
+  <%= @task.is_done %>
+</p> -->
+
+<%#= link_to 'Edit', edit_task_path(@task) %> 
+<%#= link_to 'Back', tasks_path %>
+</div>
+
+<style type="text/css">
+.color
+{ 
+  background-color: red; }
+
+
+  .color
+{ 
+  background-color: orange; }
+</style>

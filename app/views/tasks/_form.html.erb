@@ -1,0 +1,61 @@
+<%= form_with(model: task, local: true) do |form| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="col-md-8">
+     <div class="row">
+    <div class="col-md-2"> <%= form.label :name %></div>
+   <div class="col-md-4"> <%= form.text_field :name, id: :task_name ,class: 'form-control'%></div>
+</div></br>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= form.label :project_id %>
+    </div>
+  <div class="col-md-4"> <%=form.select(:projectname, Project.all.collect {|p| [ p.project_name]},{prompt: 'Select project'},class: 'form-control') %>
+  </div>
+  </div></br>
+
+  <div class="row">
+    <div class="col-md-2"><%= form.label :Description %></div>
+     <div class="col-md-4"><%= form.text_field :description, id: :task_description ,class: 'form-control'%></div>
+  </div></br>
+
+  <div class="row">
+  <div class="col-md-2"><%= form.label :assigned_to %></div>
+  <div class="col-md-4"> <%=form.select(:assigned_to, User.all.collect {|p| [ p.name] },{prompt: 'Select Task'}, class: 'form-control') %></div>
+  </div></br>
+
+
+
+   <div class="row">
+     <div class="col-md-2"><%= form.label :Due_date %></div>
+    <div class="col-md-4"><%= form.date_select :due_date, id: :task_due_date %></div>
+  </div><br/>
+
+   <div class="row">
+    <div class="col-md-2"><%= form.label :is_done %> </div>
+      <div class="col-md-4"><%= form.date_select :is_done, id: :task_is_done %></div>
+  </div><br/>
+
+  <div class="row">
+    <div class="col-md-2"><%= form.label :image %> </div>
+      <div class="col-md-4"><%= form.file_field :image, id: :image %></div>
+  </div><br/>
+  
+
+  <div class="row">
+   <div class="col-md-12"><%= form.submit class: 'btn btn-primary' %></div>
+  </div>
+<% end %>
+
+</div>
