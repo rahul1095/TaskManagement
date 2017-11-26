@@ -32,9 +32,9 @@
       <tr>
       <%a=task.due_date%> <%j=Time.now-1.days%>
       <%q=Time.now+5.days%><%k=Time.now-2.days%>
-       <%b=Time.now+4.days%><%k=Date.today%>
-      <%c=Time.now+3.days%>
-       <%d=Time.now+2.days%>
+       <%b=Time.now+4.days%> <%l=Time.now-3.days%>
+      <%c=Time.now+3.days%><%m=Time.now-4.days%>
+       <%d=Time.now+2.days%><%n=Time.now-5.days%>
         <%e=Time.now+1.days%>
 
      <% if a.to_formatted_s(:long) ==q.strftime("%B %d, %Y")||a.to_formatted_s(:long) ==b.strftime("%B %d, %Y")||a.to_formatted_s(:long) ==c.strftime("%B %d, %Y")|| a.to_formatted_s(:long) ==d.strftime("%B %d, %Y")||a.to_formatted_s(:long) ==e.strftime("%B %d, %Y")%>
@@ -51,7 +51,8 @@
         <%end%>
       
 
-      <% elsif a.to_formatted_s(:long) ==j.strftime("%B %d, %Y")||k.to_formatted_s(:long) ==b.strftime("%B %d, %Y")%>
+      <% elsif a.to_formatted_s(:long) ==j.strftime("%B %d, %Y")||k.to_formatted_s(:long) ==b.strftime("%B %d, %Y")||a.to_formatted_s(:long) ==l.strftime("%B %d, %Y")||a.to_formatted_s(:long) ==m.strftime("%B %d, %Y")||a.to_formatted_s(:long) ==n.strftime("%B %d, %Y")%>
+      
         <td class="color3"><%= task.name %></td>
         <td class="color3"><%= task.description %></td>
         <td class="color3"><%= task.due_date %></td>
