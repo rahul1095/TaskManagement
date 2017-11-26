@@ -29,13 +29,14 @@
                                 <div class="form-group">
                                     <label for="firstname" class="col-md-3 control-label">First Name</label>
                                     <div class="col-md-9">
-                                        <%= f.text_field :name,:class=>"form-control" , :placeholder=>"name" %>
+                                        <%= f.text_field :name,:class=>"form-control" , :placeholder=>"first_name" %>
                                     </div>
                                 </div>
 
                                 </div>
                                 <div class="form-group">
                                 <%= f.label :password ,:class=>"col-md-3 control-label" %>
+                                <% if @minimum_password_length %><% end %>
                                 
                                     <div class="col-md-9">
                                      <%= f.password_field :password, autocomplete: "off", :class=>"form-control", :placeholder =>"Password"%></br>
@@ -62,15 +63,20 @@
                                     </div>
                                 </div> -->
 
-                          
+                                <div class="form-group">
+                                    <!-- Button -->                                        
+                                    <div class="col-md-offset-3 col-md-9">
+                                    <%= f.submit "Sign up",:class=>"btn btn-info" %>
+                                </div>
+                                
+                               <!--  <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
                                     
                                     <div class="col-md-offset-3 col-md-9">
-                                        <div class="col-sm-12 controls">
-                                    <%= f.submit "Log in",:class => "btn btn-primary"%>
+                                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
                                     </div>                                           
                                         
                                 </div>
-                                
+                                 -->
                                 
                                 
                             <%end%>
