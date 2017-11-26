@@ -1,3 +1,4 @@
+
 <div id="flash">
 <% if flash[:alert] %>
   <div class="alert alert-danger">
@@ -7,43 +8,113 @@
 </div>
 
 <p id="notice"><%= notice %></p>
-<h1>Tasks</h1>
-
-<table>
+<h1>Projects</h1>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+<script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+<div class="container">
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
   <thead>
-    
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Due Date</th>
+       <th>Task Assigned</th>
+      <%if current_user.admin.present?%>
+        <th>Edit</th>
+        <th>Destroy</th>
+      <%end%>
+    </tr>
+  </thead>
 
   <tbody>
     <% @tasks.each do |task| %>
-    <%a=task.created_at%>
-     <tr><% if a.in_time_zone('New Delhi') ==Time.now+5.days%>
-     <div class="color">
-        <%= task.name %><%= task.description %>task.created_at(<%= task.due_date%>)
-         </div></tr>
+      <tr>
+      <%a=task.due_date%> <%j=Time.now-1.days%>
+      <%q=Time.now+5.days%><%k=Time.now-2.days%>
+       <%b=Time.now+4.days%><%k=Date.today%>
+      <%c=Time.now+3.days%>
+       <%d=Time.now+2.days%>
+        <%e=Time.now+1.days%>
 
-   <% elsif a.in_time_zone('New Delhi') >Time.now-24.hours || a.in_time_zone('New Delhi') ==Time.now
-   %>
-      <tr><div class="color1">
-      <%= task.name %><%= task.description %><%= task.due_date%>
-      </div></tr>
-      <%else%>
-       <tr><div class="color2">
-       <%= task.name %><%= task.description %><%= task.due_date%>
-        <% end %>
-    <%end%>
+     <% if a.to_formatted_s(:long) ==q.strftime("%B %d, %Y")||a.to_formatted_s(:long) ==b.strftime("%B %d, %Y")||a.to_formatted_s(:long) ==c.strftime("%B %d, %Y")|| a.to_formatted_s(:long) ==d.strftime("%B %d, %Y")||a.to_formatted_s(:long) ==e.strftime("%B %d, %Y")%>
+
+        <td class="color"><%= task.name %></td>
+        <td class="color"><%= task.description %></td>
+        <td class="color"><%= task.due_date %></td>
+        <td class="color"><%= task.assigned_to %></td>
+         <% if can? :update, task %>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+         <% end %>
+          <% if can? :destroy, task %>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      
+
+      <% elsif a.to_formatted_s(:long) ==j.strftime("%B %d, %Y")||k.to_formatted_s(:long) ==b.strftime("%B %d, %Y")%>
+        <td class="color3"><%= task.name %></td>
+        <td class="color3"><%= task.description %></td>
+        <td class="color3"><%= task.due_date %></td>
+        <td class="color3"><%= task.assigned_to %></td>
+         <% if can? :update, task %>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+         <% end %>
+          <% if can? :destroy, task %>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+
+
+        <% elsif a ==k%>
+        <td class="color1"><%= task.name %></td>
+        <td class="color1"><%= task.description %></td>
+        <td class="color1"><%= task.due_date %></td>
+        <td class="color1"><%= task.assigned_to %></td>
+        <!-- <td><%= link_to 'Show', task %></td> -->
+         <% if can? :update, task %>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+         <% end %>
+          <% if can? :destroy, task %>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+
+
+         <% else%>
+        <td class="color2"><%= task.name %></td>
+        <td class="color2"><%= task.description %></td>
+        <td class="color2"><%= task.due_date %></td>
+        <td class="color2"><%= task.assigned_to %></td>
+        <!-- <td><%= link_to 'Show', task %></td> -->
+         <% if can? :update, task %>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+         <% end %>
+          <% if can? :destroy, task %>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+      <%end%>
+    <% end %>
   </tbody>
 </table>
+</div>
 
-<br>
 
-
+<%= link_to 'New task', new_task_path %>
 
 <script type="text/javascript">
-$(document).ready(function(){
+  $(document).ready(function(){
   setTimeout(function(){
     $('#flash').remove();
   }, 5000);
  })
+
+
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+} );
+
 </script>
 
 
@@ -53,7 +124,6 @@ $(document).ready(function(){
 { 
   background-color: yellow; }
 
-
   .color1
 { 
   background-color: orange; }
@@ -61,8 +131,9 @@ $(document).ready(function(){
    .color2
 { 
   background-color: grey; }
+
+   .color3
+{ 
+  background-color: red; }
+
 </style>
-
-
-
-<%= link_to 'New Project', new_task_path %>

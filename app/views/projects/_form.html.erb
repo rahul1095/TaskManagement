@@ -1,47 +1,53 @@
 
+<div class="container">
+  <%= form_with(model: project, local: true) do |form| %>
+    <% if project.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-<%= form_with(model: project, local: true) do |form| %>
-  <% if project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+        <ul>
+        <% project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-      <% project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <!-- 
+    <div class="field">
+      <%= form.label :customer_name %>
+      <%= form.text_field :customer_name, id: :project_customer_name %>
+    </div> -->
+   <div class="col-md-10">
+    <div class="row">
+
+    <div class="row">
+      <div class="col-md-2"><%= form.label :customer_name%></div>
+    <div class="col-md-4"><%= form.text_field :customer_name, id: :project_customer_name ,class: 'form-control'%></div>
+    </div><br/>
+
+    <div class="row">
+      <div class="col-md-2"><%= form.label :project_name %></div>
+       <div class="col-md-4"><%= form.text_field :project_name, id: :project_project_name ,class: 'form-control'%></div>
+    </div><br/>
+
+    <!-- <div class="field">
+      <%= form.label :due %>
+      <%= form.text_field :due, id: :project_due %>
+    </div> -->
+
+    <div class="row">
+    <div class="col-md-2"><%= form.label :due_date %></div>
+    <div class="col-md-4"><%= form.date_select :_date, id: :project__date ,class: 'form-control'%></div>
+    </div><br/>
+
+    <div class="row">
+     <div class="col-md-2"></div>
+     <div class="col-md-4"> <%= form.submit class: 'btn btn-primary' %></div>
     </div>
+
   <% end %>
-<!-- 
-  <div class="field">
-    <%= form.label :customer_name %>
-    <%= form.text_field :customer_name, id: :project_customer_name %>
-  </div> -->
-
-  <div class="field">
-    <%= form.label :customer_name%>
-  <%= form.text_field :customer_name, id: :project_customer_name %>
   </div>
-
-  <div class="field">
-    <%= form.label :project_name %>
-    <%= form.text_field :project_name, id: :project_project_name %>
   </div>
-
-  <!-- <div class="field">
-    <%= form.label :due %>
-    <%= form.text_field :due, id: :project_due %>
-  </div> -->
-
-  <div class="field">
-    <%= form.label :due_date %>
-    <%= form.date_select :_date, id: :project__date %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-
-
+</div>
 

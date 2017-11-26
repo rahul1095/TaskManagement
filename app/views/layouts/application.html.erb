@@ -1,22 +1,66 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TaskManagement</title>
+    <title>UserAuth</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+  <nav class="navbar navbar-default navbar-static-top" style="background-color: #d5cdc3;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Task Management</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height:1px;">
+          <ul class="nav navbar-nav">
+            <li><%= link_to "New Task", new_task_path%></li>
+            <li><%= link_to "New Project", new_project_path%></li>
+            <li><a href="/users/sign_up">Sign up</a></li>
+            <!-- <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+              </ul>
+            </li> -->
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+            <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
 
-
-        <% if user_signed_in? %>    
-          <li><a href="/users/sign_out" data-method="delete" style="padding: 10px 14px;"><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>
-        <% else %>
-          <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <% end %>
+            <% else %>
+            <li><%#= link_to 'Login', login_page%></li>
+            <li><a href="/users/sign_in">Log in</a></li>
+            <li><%= link_to "New Task", new_task_path%></li>
+            <% end%>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<br>
     <%= yield %>
+    <br><br><br>
+ <!-- 
+        <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer> -->
   </body>
 </html>
+
+
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
