@@ -7,11 +7,13 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+
     
     <% flash.each do |flash, message| %>
-  <div class = "alert alert-success" id=flash <%= flash %>>
+  <div class = "alert alert-success" id ="flash2" <%= flash %>>
     <%= message %>
   </div>
+ 
 
 <% end %>
   <nav class="navbar navbar-default navbar-static-top" style="background-color: #d5cdc3;">
@@ -75,7 +77,13 @@
 
 
 
-
+<script type="text/javascript">
+  $(document).ready(function(){
+  setTimeout(function(){
+    $('#flash2').remove();
+  }, 5000);
+ })
+ </script>
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -85,9 +93,3 @@
 
 
 
-<script type="text/javascript">
-  $(document).ready(function(){
-  setTimeout(function(){
-    $('#flash').remove();
-  }, 5000);
- })
