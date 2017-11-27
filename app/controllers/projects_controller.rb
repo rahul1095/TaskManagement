@@ -26,7 +26,9 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    byebug
     @project = Project.new(project_params)
+     @project.user_id =current_user.id
 
     respond_to do |format|
       if @project.save
@@ -74,6 +76,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:customer_name, :project_name, :due, :_date)
+      params.require(:project).permit(:customer_name, :user_id,:project_name, :due, :_date)
     end
 end

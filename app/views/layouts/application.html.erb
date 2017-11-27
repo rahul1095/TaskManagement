@@ -7,6 +7,13 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+    
+    <% flash.each do |flash, message| %>
+  <div class = "alert alert-success" id=flash <%= flash %>>
+    <%= message %>
+  </div>
+
+<% end %>
   <nav class="navbar navbar-default navbar-static-top" style="background-color: #d5cdc3;">
       <div class="container">
         <div class="navbar-header">
@@ -16,11 +23,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Task Management</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height:1px;">
           <ul class="nav navbar-nav">
+          <li><%= link_to "Task Management", root_path ,class: "navbar-brand" %></li>
+          <% if user_signed_in? %>
+           <% if current_user.admin.present? %>
             <li><a href="/users/sign_up">Sign up</a></li>
+            <%end%>
+            <%end%>
+
             <!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -30,10 +42,15 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
+              <% if current_user.admin.present?%>
             <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
             <li><%= link_to "New Task", new_task_path%></li>
             <li><%= link_to "New Project", new_project_path%></li>
+           <%else%>
+           <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li> 
+            <%end%>
             <% else %>
+
             <li><%#= link_to 'Login', login_page%></li>
             <li><a href="/users/sign_in">Log in</a></li>
             <% end%>
@@ -50,6 +67,9 @@
         <p class="text-muted">Place sticky footer content here.</p>
       </div>
     </footer> -->
+
+
+
   </body>
 </html>
 
@@ -62,3 +82,12 @@
     $('#example').DataTable();
 } );
 </script>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  setTimeout(function(){
+    $('#flash').remove();
+  }, 5000);
+ })
