@@ -3,8 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   skip_before_action :require_no_authentication, only: [:new , :create, :update ]
 
   def new
-  	  @user = User.new
-  	authorize! :create, @user
+  	 super
   end
 
 
